@@ -63,6 +63,7 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "test:run": "./vendor/bin/phpunit"
+        "test:run": "./vendor/bin/phpunit",
+        "test:coverage": "./vendor/bin/phpunit --coverage-text"
     }
 }
