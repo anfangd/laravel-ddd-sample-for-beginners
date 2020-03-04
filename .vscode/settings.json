@@ -1,0 +1,6 @@
+{
+    "php.executablePath": "/usr/local/bin/php",
+    "php.validate.executablePath": "/usr/local/bin/php",
+    "phpcs.executablePath": "vendor/bin/phpcs",
+    "php-cs-fixer.onsave": true,
+}
