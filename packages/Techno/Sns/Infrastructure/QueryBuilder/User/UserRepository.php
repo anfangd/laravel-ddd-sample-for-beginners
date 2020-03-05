@@ -77,4 +77,19 @@ class UserRepository implements UserRepositoryInterface
             new UserName($found->get(0)->name)
         );
     }
+
+    /**
+     * Delete user by Name.
+     *
+     * @param User $user
+     * @return void
+     */
+    public function delete(User $user)
+    {
+        $found = DB::table('t_users')->where('name', '=', $user->getId()->getValue())->delete();
+
+        if ($found->isEmpty()) {
+            return null;
+        }
+    }
 }
