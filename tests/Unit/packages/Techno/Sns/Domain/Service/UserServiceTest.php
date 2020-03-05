@@ -8,7 +8,9 @@ use packages\Techno\Sns\Domain\Service\UserService;
 use packages\Techno\Sns\Domain\User\User;
 use packages\Techno\Sns\Domain\User\UserId;
 use packages\Techno\Sns\Domain\User\UserName;
-use PHPUnit\Framework\TestCase;
+use packages\Techno\Sns\Infrastructure\User\UserRepository;
+//use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 /**
  * UserServiceTest class
@@ -27,7 +29,9 @@ class UserServiceTest extends TestCase
             new UserId("id001"),
             new UserName("name001")
         );
-        $userService = new UserService();
+
+        $userRepository = new UserRepository();
+        $userService = new UserService($userRepository);
         $this->assertIsBool($userService->exists($user));
     }
 }
