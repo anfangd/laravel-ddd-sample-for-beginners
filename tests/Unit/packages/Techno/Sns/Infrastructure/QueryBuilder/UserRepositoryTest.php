@@ -2,12 +2,12 @@
 /**
  * Test of User Repository
  */
-namespace Tests\Unit\packages\Techno\Sns\Infrastructure\Eloquent\User;
+namespace Tests\Unit\packages\Techno\Sns\Infrastructure\QueryBuilder\User;
 
 use packages\Techno\Sns\Domain\User\User;
 use packages\Techno\Sns\Domain\User\UserId;
 use packages\Techno\Sns\Domain\User\UserName;
-use packages\Techno\Sns\Infrastructure\Eloquent\User\UserRepository;
+use packages\Techno\Sns\Infrastructure\QueryBuilder\User\UserRepository;
 //use PHPUnit\Framework\TestCase;
 use Tests\TestCase;
 use Faker\Factory as Faker;
