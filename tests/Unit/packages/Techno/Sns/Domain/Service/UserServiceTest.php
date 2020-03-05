@@ -8,7 +8,7 @@ use packages\Techno\Sns\Domain\Service\UserService;
 use packages\Techno\Sns\Domain\User\User;
 use packages\Techno\Sns\Domain\User\UserId;
 use packages\Techno\Sns\Domain\User\UserName;
-use packages\Techno\Sns\Infrastructure\User\UserRepository;
+use packages\Techno\Sns\Infrastructure\Eloquent\User\UserRepository;
 //use PHPUnit\Framework\TestCase;
 use Tests\TestCase;
 

@@ -7,7 +7,7 @@ declare(strict_types=1);
  * 
  */
 
-namespace packages\Techno\Sns\Infrastructure\User;
+namespace packages\Techno\Sns\Infrastructure\Eloquent\User;
 
 use Illuminate\Support\Facades\DB;
 use packages\Techno\Sns\Domain\User\UserRepositoryInterface;
