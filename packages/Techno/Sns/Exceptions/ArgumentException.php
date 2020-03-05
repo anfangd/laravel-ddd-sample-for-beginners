@@ -9,11 +9,11 @@ declare(strict_types=1);
 
 namespace packages\Techno\Sns\Domain\Exceptions;
 
-use RuntimeException;
+use RangeException;
 
-class ArgumentException extends RuntimeException
+class ArgumentException extends RangeException
 {
-    public function __construct($message, $type, $code = 0, RuntimeException $previous = null) {
+    public function __construct($message, $type, $code = 0, RangeException $previous = null) {
 
         $message = $message . " Type:".$type;
         parent::__construct($message, $code, $previous);

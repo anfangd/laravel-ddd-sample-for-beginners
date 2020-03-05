@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 namespace packages\Techno\Sns\Domain\Exceptions;
 
-use RuntimeException;
+use InvalidArgumentException;
 
-class ArgumentNullException extends RuntimeException
+class ArgumentNullException extends InvalidArgumentException
 {
 }
