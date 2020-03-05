@@ -89,6 +89,5 @@ class InMemoryUserRepository implements UserRepositoryInterface
     {
         unset($this->db[$user->getId()->getValue()]);
         unset($this->db_name_key[$user->getName()->getValue()]);
-
     }
 }
