@@ -89,8 +89,8 @@ class UserApplicationService
      */
     public function update(UserUpdateCommand $command)
     {
-        $targetId = new UserId($command->id);
-        $user = $this->userRepository->findById($targetId);
+        $targetName = new UserName($command->name);
+        $user = $this->userRepository->findByName($targetName);
 
         if (is_null($user)) {
             throw new CanNotRegisterUserException($user, "既に存在しています");

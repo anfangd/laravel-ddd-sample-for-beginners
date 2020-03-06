@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace packages\Techno\Sns\Application\User\GetInfo;
 
 use Exception;
-use packages\Techno\Sns\Domain\User\UserId;
+use packages\Techno\Sns\Domain\User\UserName;
 use packages\Techno\Sns\Domain\User\UserRepositoryInterface;
 use packages\Techno\Sns\UseCase\User\GetInfo\UserData;
 use packages\Techno\Sns\UseCase\User\GetInfo\UserGetInfoCommand;
@@ -37,13 +37,13 @@ class UserGetInfoService implements UserGetInfoServiceInterface
     /**
      * Get User Data.
      *
-     * @param string $userId
+     * @param UserGetInfoCommand $command
      * @return UserData|null
      */
     public function handle(UserGetInfoCommand $command)
     {
-        $targetId = new UserId($command->id);
-        $user = $this->userRepository->findById($targetId);
+        $targetName = new UserName($command->name);
+        $user = $this->userRepository->findByName($targetName);
         if (is_null($user)) {
             return null;
         }

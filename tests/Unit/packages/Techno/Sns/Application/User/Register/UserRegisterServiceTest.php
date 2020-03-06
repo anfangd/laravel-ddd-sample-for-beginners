@@ -18,6 +18,7 @@ use Tests\TestCase;
 
 use Ulid\Ulid;
 use Faker\Factory as Faker;
+use packages\Techno\Sns\Infrastructure\QueryBuilder\User\UserFactory;
 
 /**
  * UserRegisterServiceTest class
@@ -33,11 +34,12 @@ class UserRegisterServiceTest extends TestCase
 
     public function testRegister()
     {
+        $userFactory = new UserFactory();
         $userRepository = new UserRepository();
         $userService = new UserService($userRepository);
-        $userRegisterService = new UserRegisterService($userRepository, $userService);
+        $userRegisterService = new UserRegisterService($userFactory, $userRepository, $userService);
         $userRegisterService->handle(
-            new UserRegisterCommand(Ulid::generate()->__toString(), $this->faker->name())
+            new UserRegisterCommand($this->faker->name())
         );
         $this->assertTrue(true);
     }

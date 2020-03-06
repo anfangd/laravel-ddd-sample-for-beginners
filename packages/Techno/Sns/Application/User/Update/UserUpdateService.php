@@ -43,11 +43,11 @@ class UserUpdateService implements UserUpdateServiceInterface
      */
     public function handle(UserUpdateCommand $command)
     {
-        $targetId = new UserId($command->id);
-        $user = $this->userRepository->findById($targetId);
+        $targetName = new UserName($command->name);
+        $user = $this->userRepository->findByName($targetName);
 
         if (is_null($user)) {
-            throw new UserNotFoundException($targetId);
+            throw new UserNotFoundException($targetName->getValue());
         }
 
         $name = $user->getName()->getValue();

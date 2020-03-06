@@ -44,13 +44,15 @@ class UserControllerTest extends TestCase
      */
     public function testHttpPostRequest()
     {
+        $name = $this->faker->name();
+
         $response = $this->post('/user', [
             "id" => Ulid::generate()->__toString(),
-            "name" => $this->faker->name()
+            "name" => $name
             ]);
         $response->assertStatus(200);
 
-        $response = $this->get('/user/1');
+        $response = $this->get('/user/'.$name);
         $response->assertStatus(200);
 
         // $response = $this->post('/user', [
@@ -68,12 +70,13 @@ class UserControllerTest extends TestCase
     public function testHttpPutRequest()
     {
         $id = Ulid::generate()->__toString();
+        $name = $this->faker->name();
         $response = $this->post('/user', [
             "id" => $id,
-            "name" => $this->faker->name()
+            "name" => $name
             ]);
 
-        $response = $this->put('/user/'.$id, [
+        $response = $this->put('/user/'.$name, [
             "id" => $id,
             "name" => $this->faker->name()
             ]);
