@@ -39,6 +39,22 @@ class UserRepository implements UserRepositoryInterface
     }
 
     /**
+     * UpdateUser.
+     *
+     * @param User $user
+     * @return void
+     */
+    public function update(User $user)
+    {
+        DB::table('t_users')->where('id', $user->getId()->getValue())->update(
+            [
+                "id" => $user->getId()->getValue(),
+                "name" => $user->getName()->getValue()
+            ]
+        );
+    }
+
+    /**
      * Find user by Id.
      *
      * @param UserId $userId

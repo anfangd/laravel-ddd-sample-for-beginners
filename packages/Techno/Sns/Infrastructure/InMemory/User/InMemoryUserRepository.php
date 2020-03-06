@@ -50,6 +50,21 @@ class InMemoryUserRepository implements UserRepositoryInterface
     }
 
     /**
+     * Update User.
+     *
+     * @param User $user
+     * @return void
+     */
+    public function update(User $user)
+    {
+        $this->db[$user->getId()->getValue()] = $user;
+
+        $found = array_search($user->getId()->getValue(), $this->db_name_key);
+        var_dump($found);
+        $this->db_name_key[$user->getName()->getValue()] = $user;
+    }
+
+    /**
      * Find user by ID.
      *
      * @param UserId $userId
