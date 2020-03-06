@@ -12,7 +12,9 @@ namespace packages\Techno\Sns\Domain\Circle;
 use Illuminate\Support\Collection;
 use packages\Techno\Sns\Domain\Exceptions\ArgumentException;
 use packages\Techno\Sns\Domain\Exceptions\ArgumentNullException;
+use packages\Techno\Sns\Domain\Exceptions\CircleFullException;
 use packages\Techno\Sns\Domain\User\User;
+use packages\Techno\Sns\Domain\User\UserId;
 
 /**
  * User class
@@ -127,5 +129,44 @@ class Circle
     public function equals(Circle $other): bool
     {
         return $this->id == $other->id;
+    }
+
+    /**
+     * Is Circle Member full ?
+     *
+     * @return boolean
+     */
+    public function isFull(): bool
+    {
+        return $this->countMembers() >= 30;
+    }
+
+    /**
+     * Count Circle Members.
+     *
+     * @return integer
+     */
+    public function countMembers(): int
+    {
+        return $this->members->count() + 1;
+    }
+
+    /**
+     * Add new member.
+     *
+     * @param UserIdValueObject $member
+     * @return void
+     */
+    public function join(UserId $member): void
+    {
+        if (is_null($member)) {
+            throw new ArgumentNullException();
+        }
+
+        if ($this->isFull()) {
+            throw new CircleFullException();
+        }
+
+        $this->members->add($member);
     }
 }
