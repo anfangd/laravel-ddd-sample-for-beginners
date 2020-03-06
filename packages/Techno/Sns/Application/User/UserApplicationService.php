@@ -11,6 +11,7 @@ namespace packages\Techno\Sns\Application\User;
 
 use Exception;
 use packages\Techno\Sns\Domain\Exceptions\CanNotRegisterCircleException;
+use packages\Techno\Sns\Domain\Exceptions\CanNotRegisterUserException;
 use packages\Techno\Sns\Domain\User\IUserRepository;
 use packages\Techno\Sns\Domain\User\User;
 use packages\Techno\Sns\Domain\Service\UserService;
@@ -57,7 +58,7 @@ class UserApplicationService
         );
 
         if ($this->userService->exists($user)) {
-            throw new CanNotRegisterCircleException($user, "既に存在しています");
+            throw new CanNotRegisterUserException($user, "既に存在しています");
         }
 
         $this->userRepository->save($user);
@@ -92,7 +93,7 @@ class UserApplicationService
         $user = $this->userRepository->findById($targetId);
 
         if (is_null($user)) {
-            throw new CanNotRegisterCircleException($user, "既に存在しています");
+            throw new CanNotRegisterUserException($user, "既に存在しています");
 
         }
 
@@ -106,7 +107,7 @@ class UserApplicationService
         if (is_null($mailAddress)) {
         }
 
-        $this->userRepository->save($user);
+        $this->userRepository->update($user);
     }
 
     /**

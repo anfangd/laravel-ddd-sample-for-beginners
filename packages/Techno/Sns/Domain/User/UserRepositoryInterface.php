@@ -18,5 +18,6 @@ interface UserRepositoryInterface
     public function save(User $user);
     public function findById(UserId $userId);
     public function findByName(UserName $userName);
+    public function update(User $user);
     public function delete(User $user);
 }

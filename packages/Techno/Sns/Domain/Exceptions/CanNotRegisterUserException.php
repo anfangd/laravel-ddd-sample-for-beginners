@@ -4,7 +4,7 @@ namespace packages\Techno\Sns\Domain\Exceptions;
 
 use RuntimeException;
 
-class CanNotRegisterCircleException extends RuntimeException
+class CanNotRegisterUserException extends RuntimeException
 {
     public function __construct($user, $message, $code = 0, RuntimeException $previous = null) {
 

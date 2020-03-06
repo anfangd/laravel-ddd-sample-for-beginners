@@ -13,6 +13,8 @@ use packages\Techno\Sns\UseCase\User\Update\UserUpdateCommand;
 use Tests\TestCase;
 use Ulid\Ulid;
 use Faker\Factory as Faker;
+use packages\Techno\Sns\Domain\Exceptions\CanNotRegisterUserException;
+use packages\Techno\Sns\UseCase\User\Register\UserRegisterCommand;
 
 /**
  * UserApplicationServiceTest class
@@ -72,15 +74,18 @@ class UserApplicationServiceTest extends TestCase
      */
     public function testUpdateUser()
     {
-        $id = Ulid::generate();
+        $id = (Ulid::generate()->__toString());
+
         $userRepository = new UserRepository();
         $userService = new UserService($userRepository);
+
         $user = new UserApplicationService($userRepository, $userService);
 
-        $this->expectException(\Error::class);
-
         $user->register($id, $this->faker->name());
-        $user->update(new UserUpdateCommand($id));
+        $user->update(
+            new UserUpdateCommand($id, $this->faker->name())
+        );
+
         $this->assertTrue(true);
     }
 
