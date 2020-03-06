@@ -12,11 +12,12 @@ namespace packages\Techno\Sns\Application\User\Delete;
 use packages\Techno\Sns\Domain\User\UserId;
 use packages\Techno\Sns\Domain\User\UserRepositoryInterface;
 use packages\Techno\Sns\UseCase\User\Delete\UserDeleteCommand;
+use packages\Techno\Sns\UseCase\User\Delete\UserDeleteServiceInterface;
 
 /**
  * UserDeleteService class
  */
-class UserDeleteService
+class UserDeleteService implements UserDeleteServiceInterface
 {
     /** @var UserRepositoryInterface */
     private $userRepository;

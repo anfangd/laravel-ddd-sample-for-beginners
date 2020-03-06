@@ -16,11 +16,12 @@ use packages\Techno\Sns\Domain\Service\UserService;
 use packages\Techno\Sns\Domain\User\UserId;
 use packages\Techno\Sns\Domain\User\UserName;
 use packages\Techno\Sns\UseCase\User\Register\UserRegisterCommand;
+use packages\Techno\Sns\UseCase\User\Register\UserRegisterServiceInterface;
 
 /**
  * UserRegisterService class
  */
-class UserRegisterService
+class UserRegisterService implements UserRegisterServiceInterface
 {
     /** @var UserRepositoryInterface */
     private $userRepository;
