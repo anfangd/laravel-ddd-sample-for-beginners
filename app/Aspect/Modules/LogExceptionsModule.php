@@ -14,5 +14,6 @@ class LogExceptionsModule extends PackageLogExceptionsModule
     protected $classes = [
         // example
         // \App\Services\AcmeService::class
+        \App\Http\Controllers\UserController::class
     ];
 }

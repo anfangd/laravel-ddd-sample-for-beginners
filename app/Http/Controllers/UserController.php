@@ -22,6 +22,8 @@ use packages\Techno\Sns\UseCase\User\Update\UserUpdateServiceInterface;
 
 // AOP
 use Ytake\LaravelAspect\Annotation\Loggable;
+use Ytake\LaravelAspect\Annotation\Transactional;
+use Ytake\LaravelAspect\Annotation\LogExceptions;
 
 /**
  * UserController class
@@ -52,6 +54,10 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @Loggable(driver="stack")
+     * @LogExceptions(driver="stack")
+     * @Transactional("mysql")
+     * 
+     * @see config/database.php
      * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -72,6 +78,7 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @Loggable(driver="stack")
+     * @LogExceptions(driver="stack")
      * 
      * @param  string  $name
      * @return \Illuminate\Http\Response
@@ -102,6 +109,10 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @Loggable(driver="stack")
+     * @LogExceptions(driver="stack")
+     * @Transactional("mysql")
+     * 
+     * @see config/database.php
      * 
      * @param  \Illuminate\Http\Request  $request
      * @param  string  $name
@@ -119,6 +130,7 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      * 
      * @Loggable(driver="stack")
+     * @LogExceptions(driver="stack")
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
