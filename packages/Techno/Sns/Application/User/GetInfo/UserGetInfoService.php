@@ -14,11 +14,12 @@ use packages\Techno\Sns\Domain\User\UserId;
 use packages\Techno\Sns\Domain\User\UserRepositoryInterface;
 use packages\Techno\Sns\UseCase\User\GetInfo\UserData;
 use packages\Techno\Sns\UseCase\User\GetInfo\UserGetInfoCommand;
+use packages\Techno\Sns\UseCase\User\GetInfo\UserGetInfoServiceInterface;
 
 /**
  * UserGetInfoService class
  */
-class UserGetInfoService
+class UserGetInfoService implements UserGetInfoServiceInterface
 {
     /** @var UserRepositoryInterface */
     private $userRepository;

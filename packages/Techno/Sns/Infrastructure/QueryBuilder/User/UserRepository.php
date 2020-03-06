@@ -104,8 +104,9 @@ class UserRepository implements UserRepositoryInterface
     {
         $found = DB::table('t_users')->where('name', '=', $user->getId()->getValue())->delete();
 
-        if ($found->isEmpty()) {
-            return null;
-        }
+        // var_dump($found);
+        // if ($found->isEmpty()) {
+        //     return null;
+        // }
     }
 }

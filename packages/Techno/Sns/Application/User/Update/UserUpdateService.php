@@ -15,11 +15,12 @@ use packages\Techno\Sns\Domain\User\UserId;
 use packages\Techno\Sns\Domain\User\UserName;
 use packages\Techno\Sns\Domain\User\UserRepositoryInterface;
 use packages\Techno\Sns\UseCase\User\Update\UserUpdateCommand;
+use packages\Techno\Sns\UseCase\User\Update\UserUpdateServiceInterface;
 
 /**
  * UserUpdateService class
  */
-class UserUpdateService
+class UserUpdateService implements UserUpdateServiceInterface
 {
     /** @var UserRepositoryInterface */
     private $userRepository;
