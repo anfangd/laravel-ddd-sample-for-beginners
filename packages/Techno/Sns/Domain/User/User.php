@@ -83,4 +83,16 @@ class User
     {
         return $this->id == $other->id;
     }
+
+    /**
+     * Notify.
+     *
+     * @param UserNotificationInterface $note
+     * @return void
+     */
+    public function notify(UserNotificationInterface $note): void
+    {
+        $note->id($this->id);
+        $note->name($this->name);
+    }
 }

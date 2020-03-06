@@ -15,6 +15,8 @@ use packages\Techno\Sns\Domain\User\UserRepositoryInterface;
 use packages\Techno\Sns\Domain\User\User;
 use packages\Techno\Sns\Domain\User\UserId;
 use packages\Techno\Sns\Domain\User\UserName;
+use packages\Techno\Sns\Infrastructure\Notification\UserDataModelBuilder;
+use packages\Techno\Sns\UseCase\User\GetInfo\UserData;
 
 /**
  * UserRepository class
@@ -31,10 +33,15 @@ class UserRepository implements UserRepositoryInterface
      */
     public function save(User $user)
     {
+        $userDataModelBuilder = new UserDataModelBuilder();
+        $user->notify($userDataModelBuilder);
+
+        $userDataModel = $userDataModelBuilder->build();
+
         EloquentUser::create(
             [
-                "id" => $user->getId()->getValue(),
-                "name" => $user->getName()->getValue()
+                "id" => $userDataModel->id,
+                "name" => $userDataModel->name
             ]
         );
     }
@@ -47,9 +54,14 @@ class UserRepository implements UserRepositoryInterface
      */
     public function update(User $user)
     {
+        $userDataModelBuilder = new UserDataModelBuilder();
+        $user->notify($userDataModelBuilder);
+
+        $userDataModel = $userDataModelBuilder->build();
+
         EloquentUser::where("id", $user->getId()->getValue())->update(
             [
-                "name" => $user->getName()->getValue()
+                "name" => $userDataModel->name
             ]
         );
     }
@@ -62,6 +74,7 @@ class UserRepository implements UserRepositoryInterface
      */
     public function findById(UserId $userId)
     {
+        
         $found = EloquentUser::where('id', '=', $userId->getValue())->get();
 
         if ($found->isEmpty()) {
@@ -102,6 +115,53 @@ class UserRepository implements UserRepositoryInterface
      */
     public function delete(User $user)
     {
-        EloquentUser::where('name', '=', $user->getId()->getValue())->delete();
+        $userDataModelBuilder = new UserDataModelBuilder();
+        $user->notify($userDataModelBuilder);
+
+        $userDataModel = $userDataModelBuilder->build();
+
+        EloquentUser::where('name', '=', $userDataModel->id)->delete();
+    }
+
+    /**
+     * Convert from EloquentUser to User.
+     *
+     * @param EloquentUser $from
+     * @return User
+     */
+    private function toModel(EloquentUser $from): User
+    {
+        return new User(
+            new UserId($from->id),
+            new UserName($from->name)
+        );
+    }
+
+    /**
+     * Transfer from User to UserData.
+     *
+     * @param User $from
+     * @param EloquentUser $model
+     * @return EloquentUser
+     */
+    private function transfer(User $from, EloquentUser $model): EloquentUser
+    {
+        $model->id = $from->getName()->getValue();
+        $model->name = $from->getName()->getValue();
+        return $model;
+    }
+
+    /**
+     * Convert from User to UserDataModel.
+     *
+     * @param User $from
+     * @return EloquentUser
+     */
+    private function toDataModel(User $from): EloquentUser
+    {
+        $userDataModel = new EloquentUser();
+        $userDataModel->id = $from->getId()->getValue();
+        $userDataModel->name = $from->getName()->getValue();
+        return $userDataModel;
     }
 }

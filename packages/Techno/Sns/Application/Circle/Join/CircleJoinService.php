@@ -79,11 +79,11 @@ class CircleJoinService implements CircleJoinServiceInterface
             throw new CircleNotFoundException('サークルが見つかりませんでした.');
         }
 
-        if ($circle->getMembers()->count() >= 29) {
+        if ($circle->isFull()) {
             throw new CircleFullException($id);
         }
 
-        $circle->getMembers()->add($member);
+        $circle->Join($member);
         $this->circleRepository->save($circle);
     }
 }
