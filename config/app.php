@@ -165,6 +165,10 @@ return [
         /*
          * Package Service Providers...
          */
+        // added AspectServiceProvider 
+        \Ytake\LaravelAspect\AspectServiceProvider::class,
+        // added Artisan Command
+        \Ytake\LaravelAspect\ConsoleServiceProvider::class,
 
         /*
          * Application Service Providers...
