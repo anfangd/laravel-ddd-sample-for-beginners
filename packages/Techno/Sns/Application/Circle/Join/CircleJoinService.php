@@ -13,6 +13,7 @@ use Exception;
 use packages\Techno\Sns\Domain\Service\CircleService;
 use packages\Techno\Sns\Domain\Circle\ICircleRepository;
 use packages\Techno\Sns\Domain\Circle\CircleFactoryInterface;
+use packages\Techno\Sns\Domain\Circle\CircleFullSpecification;
 use packages\Techno\Sns\Domain\Circle\CircleId;
 use packages\Techno\Sns\Domain\Circle\CircleRepositoryInterface;
 use packages\Techno\Sns\Domain\Exceptions\CircleFullException;
@@ -79,8 +80,9 @@ class CircleJoinService implements CircleJoinServiceInterface
             throw new CircleNotFoundException('サークルが見つかりませんでした.');
         }
 
-        if ($circle->isFull()) {
-            throw new CircleFullException($id);
+        $circleFullSpecification = new CircleFullSpecification($this->userRepository);
+        if ($circleFullSpecification->isSatisfiedBy($circle)) {
+            throw new CircleFullException();
         }
 
         $circle->Join($member);
