@@ -38,12 +38,14 @@ class UserControllerTest extends TestCase
     }
 
     /**
-     * Test of HTTP GET Request.
+     * Test of HTTP POST Request.
      *
      * @return void
      */
     public function testHttpPostRequest()
     {
+        //TODO: Transaction 制御を確認するテストの書き方が分からなくて書いてない。
+
         $name = $this->faker->name();
 
         $response = $this->post('/user', [
@@ -69,6 +71,8 @@ class UserControllerTest extends TestCase
      */
     public function testHttpPutRequest()
     {
+        //TODO: Transaction 制御を確認するテストの書き方が分からなくて書いてない。
+        
         $id = Ulid::generate()->__toString();
         $name = $this->faker->name();
         $response = $this->post('/user', [
