@@ -75,15 +75,16 @@ class UserApplicationServiceTest extends TestCase
     public function testUpdateUser()
     {
         $id = (Ulid::generate()->__toString());
+        $name = $this->faker->name();
 
         $userRepository = new UserRepository();
         $userService = new UserService($userRepository);
 
         $user = new UserApplicationService($userRepository, $userService);
 
-        $user->register($id, $this->faker->name());
+        $user->register($id, $name);
         $user->update(
-            new UserUpdateCommand($id, $this->faker->name())
+            new UserUpdateCommand($name, $this->faker->name())
         );
 
         $this->assertTrue(true);

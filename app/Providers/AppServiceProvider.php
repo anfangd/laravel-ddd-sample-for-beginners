@@ -80,6 +80,11 @@ class AppServiceProvider extends ServiceProvider
             \packages\Techno\Sns\Infrastructure\QueryBuilder\User\UserRepository::class
         );
 
+        // Factory
+        $this->app->bind(
+            \packages\Techno\Sns\Domain\User\UserFactoryInterface::class,
+            \packages\Techno\Sns\Infrastructure\QueryBuilder\User\UserRepository::class
+        );
     }
 
     /**
@@ -113,6 +118,11 @@ class AppServiceProvider extends ServiceProvider
             \packages\Techno\Sns\Infrastructure\QueryBuilder\User\UserRepository::class
         );
 
+        // Factory
+        $this->app->bind(
+            \packages\Techno\Sns\Domain\User\UserFactoryInterface::class,
+            \packages\Techno\Sns\Infrastructure\QueryBuilder\User\UserFactory::class
+        );
     }
 
     /**
@@ -144,6 +154,12 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             \packages\Techno\Sns\Domain\User\UserRepositoryInterface::class,
             \packages\Techno\Sns\Infrastructure\Eloquent\User\UserRepository::class
+        );
+
+        // Factory
+        $this->app->bind(
+            \packages\Techno\Sns\Domain\User\UserFactoryInterface::class,
+            \packages\Techno\Sns\Infrastructure\Eloquent\User\UserFactory::class
         );
 
     }
@@ -179,5 +195,10 @@ class AppServiceProvider extends ServiceProvider
             \packages\Techno\Sns\Infrastructure\InMemory\User\InMemoryUserRepository::class
         );
 
+        // Factory
+        $this->app->bind(
+            \packages\Techno\Sns\Domain\User\UserFactoryInterface::class,
+            \packages\Techno\Sns\Infrastructure\InMemory\User\InMemoryUserFactory::class
+        );
     }
 }

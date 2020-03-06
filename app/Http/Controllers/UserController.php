@@ -55,7 +55,7 @@ class UserController extends Controller
     {
         //
         $params = $request->all();
-        $command = new UserRegisterCommand($params['id'], $params['name']);
+        $command = new UserRegisterCommand($params['name']);
         $result = $interactor->handle($command);
 
         //TODO: 専用の ViewModel を作成してレスポンスを返す。
@@ -66,13 +66,13 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $name
      * @return \Illuminate\Http\Response
      */
-    public function show(UserGetInfoServiceInterface $interactor, $id)
+    public function show(UserGetInfoServiceInterface $interactor, $name)
     {
         //
-        $command = new UserGetInfoCommand($id);
+        $command = new UserGetInfoCommand($name);
         $resutl = $interactor->handle($command);
 
         //TODO: 専用の ViewModel を作成してレスポンスを返す。
@@ -95,14 +95,14 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  string  $name
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateServiceInterface $interactor, Request $request, $id)
+    public function update(UserUpdateServiceInterface $interactor, Request $request, $name)
     {
         //
         $params = $request->all();
-        $command = new UserUpdateCommand($id, $params['name']);
+        $command = new UserUpdateCommand($name, $params['name']);
         $interactor->handle($command);
     }
 

@@ -11,10 +11,9 @@ namespace packages\Techno\Sns\Application\User\Register;
 
 use packages\Techno\Sns\Domain\Exceptions\CanNotRegisterUserException;
 use packages\Techno\Sns\Domain\User\UserRepositoryInterface;
-use packages\Techno\Sns\Domain\User\User;
-use packages\Techno\Sns\Domain\Service\UserService;
-use packages\Techno\Sns\Domain\User\UserId;
+use packages\Techno\Sns\Domain\User\UserFactoryInterface;
 use packages\Techno\Sns\Domain\User\UserName;
+use packages\Techno\Sns\Domain\Service\UserService;
 use packages\Techno\Sns\UseCase\User\Register\UserRegisterCommand;
 use packages\Techno\Sns\UseCase\User\Register\UserRegisterServiceInterface;
 
@@ -23,6 +22,8 @@ use packages\Techno\Sns\UseCase\User\Register\UserRegisterServiceInterface;
  */
 class UserRegisterService implements UserRegisterServiceInterface
 {
+    /** @var UserFactoryInterface */
+    private $userFactory;
     /** @var UserRepositoryInterface */
     private $userRepository;
     /** @var UserService */
@@ -33,8 +34,13 @@ class UserRegisterService implements UserRegisterServiceInterface
      *
      * @param UserRepositoryInterface $userRepository
      */
-    public function __construct(UserRepositoryInterface $userRepository, UserService $userService)
+    public function __construct(
+        UserFactoryInterface $userFactoryInterface,
+        UserRepositoryInterface $userRepository, 
+        UserService $userService)
     {
+        $this->userFactory = $userFactoryInterface;
+
         $this->userRepository = $userRepository;
         $this->userService = $userService;
     }
@@ -48,10 +54,8 @@ class UserRegisterService implements UserRegisterServiceInterface
      */
     public function handle(UserRegisterCommand $command):void
     {
-        $user = new User(
-            new UserId($command->id),
-            new UserName($command->name)
-        );
+        $userName = new UserName($command->name);
+        $user = $this->userFactory->create($userName);
 
         if ($this->userService->exists($user)) {
             throw new CanNotRegisterUserException($user, "既に存在しています");
