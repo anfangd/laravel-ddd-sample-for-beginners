@@ -1,0 +1,13 @@
+<?php
+namespace packages\Techno\Sns\Domain\User;
+
+require('./UserId.php');
+require('./UserName.php');
+require('../../Exceptions/ArgumentException.php');
+require('../../Exceptions/ArgumentNullException.php');
+
+$userId = new UserId("testUserId\n");
+echo $userId->getValue();
+
+$userName = new UserName("te");
+echo $userName->getValue();
